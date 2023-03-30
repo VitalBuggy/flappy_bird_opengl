@@ -18,7 +18,7 @@ PROGRAMS := $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%,$(SOURCES))
 
 all: $(PROGRAMS)
 
-build/%: $(SOURCES)
+$(BUILDDIR)/%: $(SOURCES)
 	$(CXX) $(CXXFLAGS) $< $(LDLIBS) -o $@
 
 clean:
