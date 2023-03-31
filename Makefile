@@ -1,25 +1,29 @@
-# optional flags (if the compiler supports it)
-CXXFLAGS += -std=c++11
+# Compiler and linker settings
+ifeq ($(shell uname -s), Darwin)
+    ifeq ($(shell uname -p), arm)
+        CC = arch -x86_64 g++
+    else
+        CC = g++
+    endif
+    CFLAGS = -I/usr/local/Cellar/sfml/2.5.1_2/include
+    LDFLAGS = -L/usr/local/Cellar/sfml/2.5.1_2/lib -lsfml-audio -lsfml-network -lsfml-graphics -lsfml-window -lsfml-system
+else
+    CC = g++
+    CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic-errors
+    LDLIBS := $(shell pkg-config sfml-all --libs)
+endif
 
-# HIGHLY RECOMMENDED flags
-CXXFLAGS += -Wall -Wextra -pedantic-errors
-
-# required for SFML programs
-LDLIBS := $(shell pkg-config sfml-all --libs)
-
-# The rest will turn any source file ending in .cpp
-# into a program of the same name
-
+# Directories and files
 SRCDIR := src
 BUILDDIR := build
-
 SOURCES := $(wildcard $(SRCDIR)/*.cpp)
-PROGRAMS := $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%,$(SOURCES))
+PROGRAM := $(BUILDDIR)/prog
 
-all: $(PROGRAMS)
+# Targets
+all: $(PROGRAM)
 
-$(BUILDDIR)/%: $(SOURCES)
-	$(CXX) $(CXXFLAGS) $< $(LDLIBS) -o $@
+$(PROGRAM): $(SOURCES)
+	$(CC) $(CFLAGS) $(CXXFLAGS) $^ $(LDFLAGS) -o $(PROGRAM)
 
 clean:
-	$(RM) $(BUILDDIR)/*
+	$(RM) $(PROGRAM)
