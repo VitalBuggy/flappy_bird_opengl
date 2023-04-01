@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "core/window.h"
-#include "core/Bird.h"
+#include "game/Bird.h"
 
 int main()
 {

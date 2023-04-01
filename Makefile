@@ -14,7 +14,7 @@ else
 endif
 
 # Directories and files
-SRCDIR := src src/core
+SRCDIR := src src/core src/game
 BUILDDIR := build
 SOURCES := $(wildcard $(addsuffix /*.cpp,$(SRCDIR)))
 PROGRAM := $(BUILDDIR)/prog
