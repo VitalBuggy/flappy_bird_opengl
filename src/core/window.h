@@ -13,12 +13,14 @@ public:
     void draw(const sf::Drawable& drawable);
     void display();
     bool isOpen();
+    float getDeltaTime();
     void close();
 
     sf::RenderWindow& getWindow();
 
 private:
     sf::RenderWindow game_window;
+    sf::Clock clock;
 };
 
 
