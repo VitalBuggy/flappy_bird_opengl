@@ -10,7 +10,7 @@ ifeq ($(shell uname -s), Darwin)
 else
     CC = g++
     CXXFLAGS += -std=c++11 -Wall -Wextra -pedantic-errors
-    LDLIBS := $(shell pkg-config sfml-all --libs)
+    LDFLAGS := $(shell pkg-config sfml-all --libs)
 endif
 
 # Directories and files
@@ -26,4 +26,4 @@ $(PROGRAM): $(SOURCES)
 	$(CC) $(CFLAGS) $(CXXFLAGS) $^ $(LDFLAGS) -o $(PROGRAM)
 
 clean:
-	$(RM) $(PROGRAM)
+	$(RM) $(BUILDDIR)/*
