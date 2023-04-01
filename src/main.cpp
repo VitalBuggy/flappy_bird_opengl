@@ -1,21 +1,37 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include "core/window.h"
+#include "core/Bird.h"
 
-int main() {
-  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-  sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
+int main()
+{
+  Window window(800, 600, "SFML Bird");
+  Bird Flappy_Bird(window.getWindow(), 100.0f, 100.0f, 3.0f, 20.0f);
 
-  while (window.isOpen()) {
+  while (window.isOpen())
+  {
     sf::Event event;
-    while (window.pollEvent(event)) {
+
+    while (window.getWindow().pollEvent(event))
+    {
       if (event.type == sf::Event::Closed)
+      {
         window.close();
+      }
+
+      else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
+      {
+        Flappy_Bird.jump();
+      }
     }
 
-    window.clear();
-    window.draw(shape);
+    Flappy_Bird.update(window.getDeltaTime());
+
+    window.getWindow().clear(sf::Color::White);
+
+    window.draw(Flappy_Bird.getDrawable());
+
     window.display();
   }
-
   return 0;
 }
