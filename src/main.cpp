@@ -6,7 +6,8 @@
 int main()
 {
   Window window(800, 600, "SFML Bird");
-  Bird Flappy_Bird(window.getWindow(), 100.0f, 100.0f, 3.0f, 20.0f);
+  Bird Flappy_Bird(window.getWindow(), 100.0f, 100.0f, 1.0f, 20.0f);
+  float jumpTime = 0.0f;
 
   while (window.isOpen())
   {
@@ -22,14 +23,21 @@ int main()
       else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
       {
         Flappy_Bird.jump();
+        jumpTime = window.getDeltaTime();
       }
+
     }
 
-    Flappy_Bird.update(window.getDeltaTime());
+    Flappy_Bird.update(window.getDeltaTime() - jumpTime);
 
     window.getWindow().clear(sf::Color::White);
 
-    window.draw(Flappy_Bird.getDrawable());
+    if (Flappy_Bird.is_alive()) {
+      window.draw(Flappy_Bird.getDrawable());
+    } else {
+      std::cout << "Game Over!" << std::endl;
+      window.close();
+    }
 
     window.display();
   }
