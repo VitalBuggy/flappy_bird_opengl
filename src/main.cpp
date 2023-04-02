@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "core/window.h"
+#include "core/Window.h"
 #include "core/Bird.h"
 
 int main()
