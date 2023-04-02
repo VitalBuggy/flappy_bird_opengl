@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../game/Bird.h"
-#include "window.h"
+#include "Window.h"
 
 class Game {
   public:

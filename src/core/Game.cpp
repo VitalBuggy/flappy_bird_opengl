@@ -1,7 +1,7 @@
 #ifndef GAME_CPP
 #define GAME_CPP
 
-#include "game.h"
+#include "Game.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 

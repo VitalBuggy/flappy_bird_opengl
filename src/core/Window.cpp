@@ -1,7 +1,7 @@
 #ifndef WINDOW_CPP
 #define WINDOW_CPP
 
-#include "window.h"
+#include "Window.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
