@@ -6,12 +6,13 @@
 #include <SFML/Graphics.hpp>
 
 Game::Game() {
-  std::cout << "hit the constructor";
+  this->window = new Window(800, 600, "Flappy Bird");
+  this->bird = new Bird(this->window->getWindow(), 100.0f, 100.0f, 3.0f, 20.f);
 }
 
 void Game::run() {
   // Run game loop
-  while (this->window.isOpen()) {
+  while (this->window->isOpen()) {
     this->process_events();
     this->update();
     this->draw();
@@ -20,20 +21,24 @@ void Game::run() {
 
 void Game::process_events() {
   sf::Event event;
-  while (window.pollEvent(event)) {
-  if (event.type == sf::Event::Closed)
-    this->window.close();
+  while (window->getWindow().pollEvent(event)) {
+    if (event.type == sf::Event::Closed) {
+      this->window->close();
+    }
+    else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+      this->bird->jump();
+    }
   }
 }
 
 void Game::update() {
-
-  
+  this->bird->update(this->window->getDeltaTime());
 }
 
 void Game::draw() {
-  this->window.clear();
-  this->window.display();
+  this->window->getWindow().clear(sf::Color::White);
+  this->window->draw(this->bird->getDrawable());
+  this->window->display();
 }
 
 #endif // GAME_CPP

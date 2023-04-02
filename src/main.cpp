@@ -2,10 +2,11 @@
 #include <iostream>
 #include "core/window.h"
 #include "game/Bird.h"
+#include "core/game.h"
 
 int main()
 {
-  Window window(800, 600, "SFML Bird");
+/*   Window window(800, 600, "SFML Bird");
   Bird Flappy_Bird(window.getWindow(), 100.0f, 100.0f, 3.0f, 20.0f);
 
   while (window.isOpen())
@@ -33,5 +34,7 @@ int main()
 
     window.display();
   }
-  return 0;
+  return 0; */
+  Game g;
+  g.run();
 }

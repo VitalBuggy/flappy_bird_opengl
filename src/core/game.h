@@ -1,7 +1,9 @@
 #ifndef GAME_H
-#define GAME_H
+#define GAME_H 
 
 #include <SFML/Graphics.hpp>
+#include "../game/Bird.h"
+#include "window.h"
 
 class Game {
   public:
@@ -12,7 +14,8 @@ class Game {
     void process_events();
     void update();
     void draw();
-    sf::RenderWindow window;
+    Window* window;
+    Bird *bird;
 };
 
 #endif // GAME_H
